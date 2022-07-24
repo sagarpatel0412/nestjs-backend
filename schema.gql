@@ -44,6 +44,7 @@ type UserEntity {
   lastname: String!
   username: String!
   password: String!
+  address: String!
   contact: Int!
   celestialPosts: [CelestialPost!]
 }
@@ -56,6 +57,7 @@ type CreateUserDto {
   lastname: String!
   password: String!
   contact: Int!
+  address: String!
 }
 
 type UserAuthModel {
@@ -127,6 +129,7 @@ input userInput {
   lastname: String!
   password: String!
   contact: Int!
+  address: String!
 }
 
 input UpdateUserInput {
@@ -136,6 +139,7 @@ input UpdateUserInput {
   lastname: String!
   password: String!
   contact: Int!
+  address: String!
 }
 
 input CreateCelestialPostDto {

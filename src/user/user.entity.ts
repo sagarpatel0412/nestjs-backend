@@ -37,6 +37,10 @@ export class UserEntity {
   @Field(() => String)
   password: string;
 
+  @Column('varchar')
+  @Field(() => String)
+  address: string;
+
   @Column('int')
   @Field(() => Int)
   contact: number;

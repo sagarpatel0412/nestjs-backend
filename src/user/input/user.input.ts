@@ -14,4 +14,6 @@ export class userInput {
   password: string;
   @Field(() => Int)
   contact: number;
+  @Field(() => String)
+  address: string;
 }

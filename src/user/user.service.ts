@@ -32,6 +32,7 @@ export class UserService {
     user.username = data.username;
     user.password = password;
     user.contact = data.contact;
+    user.address = data.address;
 
     await this.UserRepository.save(user);
 
@@ -62,6 +63,7 @@ export class UserService {
     user.password = password;
     user.username = updateUserInput.username;
     user.contact = updateUserInput.contact;
+    user.address = updateUserInput.address
     if (!user) {
       throw new NotFoundException(`User with ${id} not found`);
     }
@@ -79,6 +81,7 @@ export class UserService {
         password: '',
         username: '',
         contact: 0,
+        address: '',
       };
     } else {
       throw new NotFoundException(`User with ${id} not found`);
