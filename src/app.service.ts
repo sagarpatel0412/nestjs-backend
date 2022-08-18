@@ -3,6 +3,7 @@ import { HttpService } from '@nestjs/axios';
 @Injectable()
 export class AppService {
   constructor(private http: HttpService) {}
+
   getHello(): Promise<any> {
     return this.http
       .get(
@@ -20,5 +21,10 @@ export class AppService {
       .toPromise()
       .then((res) => res.data)
       .catch((err) => console.log(err));
+  }
+  getWelcomePage(): string {
+    const imag1 =
+      'https://unsplash.com/photos/RN6ts8IZ4_0/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8Nnx8YmVhY2h8ZW58MHx8fHwxNjYwODE5MDA0&force=true';
+    return `<!DOCTYPE html><html><head><title>Nebula</title></head><body style="background-image: url(${imag1}); background-size:cover; color:white; hieght=100vh; width=100vw; align-items:center; text-align:center"><h1 style="color:white">Welcome to Our backend</h1><p>Take some chill time and see beach......</p><p>Braise yourself up .....</p><button style="padding:10px;text-decoration:none; background:black; border-radius:12px; opacity:0.8;margin:5px"><a href="/top-10" style="text-decoration:none; color:white">Route To Top 10 Image From Unsplash</a></button><button style="padding:10px;text-decoration:none; background:black; border-radius:12px; opacity:0.8;margin:5px"><a href="/graphql" style="text-decoration:none; color:white">Route To GraphQL Playground</a></button></body></html>`;
   }
 }
