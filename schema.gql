@@ -80,6 +80,14 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type CarasoulEntity {
+  id: String!
+  image: String!
+  description: String!
+  title: String!
+  quote: String!
+}
+
 type Query {
   pokemon: [CreatePokemonDto!]!
   getPokemon(id: String!): CreatePokemonDto!
@@ -89,6 +97,8 @@ type Query {
   getPost(id: String!): CelestialPostModel!
   getComments: [PostLikeEntity!]!
   getComment(id: String!): PostLikeEntity!
+  getCarasouls: [CarasoulEntity!]!
+  carasoul(id: String!): CarasoulEntity!
 }
 
 type Mutation {
@@ -108,6 +118,9 @@ type Mutation {
   createLike(createPostLikeInput: CreatePostLikeDto!): PostLikeEntity!
   updateLike(id: String!, updatePostLikeInput: UpdatePostLikeDto!): PostLikeEntity!
   deleteLike(id: String!): PostLikeEntity!
+  createCarasoul(createCarasoulInput: CreateCarasoulDto!): CarasoulEntity!
+  updateCarasoul(id: String!, updateCarasoulInput: UpdateCarasoulDto!): CarasoulEntity!
+  deleteCarasoul(id: String!): CarasoulEntity!
 }
 
 input UpdatePokemonInput {
@@ -174,5 +187,20 @@ input UpdatePostLikeDto {
   userId: String
   userName: String
   like: Boolean
+  id: String!
+}
+
+input CreateCarasoulDto {
+  image: String!
+  description: String!
+  title: String!
+  qoute: String!
+}
+
+input UpdateCarasoulDto {
+  image: String
+  description: String
+  title: String
+  qoute: String
   id: String!
 }
