@@ -12,6 +12,7 @@ import { CelestialPostModule } from './celestial-post/celestial-post.module';
 import { PostCommentsModule } from './post-comments/post-comments.module';
 import { PostLikesModule } from './post-likes/post-likes.module';
 import { HttpModule } from '@nestjs/axios';
+import { CarasoulModule } from './carasoul/carasoul.module';
 
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { HttpModule } from '@nestjs/axios';
     PostCommentsModule,
     PostLikesModule,
     HttpModule,
+    CarasoulModule,
   ],
   controllers: [AppController],
   providers: [AppService],
