@@ -88,6 +88,20 @@ type CarasoulEntity {
   quote: String!
 }
 
+type EventEntity {
+  id: String!
+  name: String!
+  location: String!
+  price: String!
+  description: String!
+  owner: String!
+  contact: String!
+  management_contact: String!
+  manager: String!
+  showDate: String!
+  showTime: String!
+}
+
 type Query {
   pokemon: [CreatePokemonDto!]!
   getPokemon(id: String!): CreatePokemonDto!
@@ -99,6 +113,8 @@ type Query {
   getComment(id: String!): PostLikeEntity!
   getCarasouls: [CarasoulEntity!]!
   carasoul(id: String!): CarasoulEntity!
+  getEvent(id: String!): EventEntity!
+  getEvents: [EventEntity!]!
 }
 
 type Mutation {
@@ -121,6 +137,9 @@ type Mutation {
   createCarasoul(createCarasoulInput: CreateCarasoulDto!): CarasoulEntity!
   updateCarasoul(id: String!, updateCarasoulInput: UpdateCarasoulDto!): CarasoulEntity!
   deleteCarasoul(id: String!): CarasoulEntity!
+  createEvent(createEventInput: CreateEventDto!): EventEntity!
+  updateEvent(id: String!, updateEventInput: UpdateEventDto!): EventEntity!
+  deleteEvent(id: String!): EventEntity!
 }
 
 input UpdatePokemonInput {
@@ -202,5 +221,32 @@ input UpdateCarasoulDto {
   description: String
   title: String
   qoute: String
+  id: String!
+}
+
+input CreateEventDto {
+  name: String!
+  location: String!
+  price: String!
+  description: String!
+  owner: String!
+  contact: String!
+  management_contact: String!
+  manager: String!
+  showDate: String!
+  showTime: String!
+}
+
+input UpdateEventDto {
+  name: String
+  location: String
+  price: String
+  description: String
+  owner: String
+  contact: String
+  management_contact: String
+  manager: String
+  showDate: String
+  showTime: String
   id: String!
 }
