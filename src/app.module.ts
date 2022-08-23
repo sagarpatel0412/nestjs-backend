@@ -13,6 +13,7 @@ import { PostCommentsModule } from './post-comments/post-comments.module';
 import { PostLikesModule } from './post-likes/post-likes.module';
 import { HttpModule } from '@nestjs/axios';
 import { CarasoulModule } from './carasoul/carasoul.module';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -63,6 +64,7 @@ import { CarasoulModule } from './carasoul/carasoul.module';
     PostLikesModule,
     HttpModule,
     CarasoulModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService],
