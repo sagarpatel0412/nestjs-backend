@@ -1,8 +1,11 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { UserEntity } from 'src/user/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -59,4 +62,19 @@ export class EventEntity {
 
   @UpdateDateColumn()
   updateAt: Date;
+
+  @ManyToMany((type) => UserEntity, (user) => user.events, { lazy: true })
+  @JoinTable({
+    name: 'users_events',
+    joinColumn: {
+      name: 'eventId',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'userId',
+      referencedColumnName: 'id',
+    },
+  })
+  @Field(() => [UserEntity], { nullable: true })
+  users: UserEntity[];
 }

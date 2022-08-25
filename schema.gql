@@ -37,6 +37,21 @@ type CelestialPost {
   likes: [PostLikeEntity!]
 }
 
+type EventEntity {
+  id: String!
+  name: String!
+  location: String!
+  price: String!
+  description: String!
+  owner: String!
+  contact: String!
+  management_contact: String!
+  manager: String!
+  showDate: String!
+  showTime: String!
+  users: [UserEntity!]
+}
+
 type UserEntity {
   id: String!
   email: String!
@@ -47,6 +62,7 @@ type UserEntity {
   address: String!
   contact: Int!
   celestialPosts: [CelestialPost!]
+  events: [EventEntity!]
 }
 
 type CreateUserDto {
@@ -86,20 +102,6 @@ type CarasoulEntity {
   description: String!
   title: String!
   quote: String!
-}
-
-type EventEntity {
-  id: String!
-  name: String!
-  location: String!
-  price: String!
-  description: String!
-  owner: String!
-  contact: String!
-  management_contact: String!
-  manager: String!
-  showDate: String!
-  showTime: String!
 }
 
 type Query {
