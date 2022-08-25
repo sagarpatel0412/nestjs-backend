@@ -76,6 +76,7 @@ export class EventService {
         showTime: '',
         createdAt: new Date(0),
         updateAt: new Date(0),
+        users: null,
       };
     }
   }
