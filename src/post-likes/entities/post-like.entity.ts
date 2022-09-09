@@ -11,6 +11,7 @@ import { CelestialPost } from 'src/celestial-post/entities/celestial-post.entity
 
 @Entity('postLikes')
 @ObjectType()
+
 export class PostLikeEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String)

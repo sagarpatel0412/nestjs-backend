@@ -49,8 +49,8 @@ export class UserService {
   }
   async updateUser(
     id: string,
-    updateUserInput: UpdateUserInput,
-  ): Promise<CreateUserDto> {
+    updateUserInput: userInput,
+  ): Promise<UserEntity> {
     const user = await this.UserRepository.preload({
       id: id,
       ...updateUserInput,

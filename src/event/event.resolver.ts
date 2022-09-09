@@ -4,8 +4,13 @@ import { EventEntity } from './entities/event.entity';
 import { CreateEventDto } from './dto/create-event.input';
 import { UpdateEventDto } from './dto/update-event.input';
 import { AllowUnauthorized } from 'src/auth/decorators/allow-unauthorized.decorator';
+import { EnterEventDto } from './dto/enter-event.input';
+import { UserEntity } from 'src/user/user.entity';
+import { CreateUserDto } from 'src/user/dto/create-user.input';
+import { userInput } from 'src/user/input/user.input';
+import { userEventInput } from 'src/user/input/user-event.input';
 
-@Resolver(() => Event)
+@Resolver(() => EventEntity)
 export class EventResolver {
   constructor(private readonly eventService: EventService) {}
 
@@ -40,5 +45,11 @@ export class EventResolver {
   @Query(() => [EventEntity])
   getEvents() {
     return this.eventService.getEvents();
+  }
+
+  @AllowUnauthorized()
+  @Mutation(() => EventEntity)
+  enterEvent(@Args('createEventInput') createEventInput: CreateEventDto, @Args({name:"users", type: () => [userEventInput]}) user: [userEventInput]) {
+    return this.eventService.enterEvent(createEventInput,user);
   }
 }

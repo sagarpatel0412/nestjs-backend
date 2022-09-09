@@ -14,6 +14,7 @@ import { PostLikesModule } from './post-likes/post-likes.module';
 import { HttpModule } from '@nestjs/axios';
 import { CarasoulModule } from './carasoul/carasoul.module';
 import { EventModule } from './event/event.module';
+import { UsersEventsModule } from './users_events/users_events.module';
 
 @Module({
   imports: [
@@ -65,8 +66,10 @@ import { EventModule } from './event/event.module';
     HttpModule,
     CarasoulModule,
     EventModule,
+    UsersEventsModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+//PK_38e35d22994b239b354e4d622c4

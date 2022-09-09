@@ -1,7 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from 'src/user/dto/create-user.input';
+import { userEventInput } from 'src/user/input/user-event.input';
+import { userInput } from 'src/user/input/user.input';
+import { UserEntity } from 'src/user/user.entity';
 import { Repository } from 'typeorm';
 import { CreateEventDto } from './dto/create-event.input';
+import { EnterEventDto } from './dto/enter-event.input';
 import { UpdateEventDto } from './dto/update-event.input';
 import { EventEntity } from './entities/event.entity';
 
@@ -88,6 +93,26 @@ export class EventService {
 
   async getEvents(): Promise<Array<EventEntity>> {
     const event = await this.eventEntity.find();
+    return event;
+  }
+
+   async enterEvent(createEventInput: CreateEventDto,user:[userEventInput]): Promise<EventEntity> {
+    console.log("user",user)
+    const eventInput = new EventEntity();
+ 
+    eventInput.name = createEventInput.name;
+    eventInput.description = createEventInput.description;
+    eventInput.contact = createEventInput.contact;
+    eventInput.location = createEventInput.location;
+    eventInput.price = createEventInput.price;
+    eventInput.manager = createEventInput.manager;
+    eventInput.management_contact = createEventInput.management_contact;
+    eventInput.owner = createEventInput.owner;
+    eventInput.showDate = createEventInput.showDate;
+    eventInput.showTime = createEventInput.showTime;
+    console.log('eventInput.users', typeof eventInput.users)
+    eventInput.users = Promise.resolve(user)
+    const event = await this.eventEntity.save(eventInput);
     return event;
   }
 }

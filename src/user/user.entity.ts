@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { isEmpty } from 'class-validator';
 import { CelestialPost } from 'src/celestial-post/entities/celestial-post.entity';
 import { EventEntity } from 'src/event/entities/event.entity';
 import {
@@ -52,9 +53,9 @@ export class UserEntity {
     (celestialPosts: CelestialPost) => celestialPosts.users,
   )
   @Field(() => [CelestialPost], { nullable: true })
-  celestialPosts: CelestialPost[];
+  celestialPosts?: CelestialPost[] | null;
 
-  @ManyToMany(() => EventEntity, (event) => event.users, { lazy: true })
+  @ManyToMany(() => EventEntity, (event) => event.users)
   @Field(() => [EventEntity], { nullable: true })
-  events: EventEntity[];
+  events?: EventEntity[] | null;
 }

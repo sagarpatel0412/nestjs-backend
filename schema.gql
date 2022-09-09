@@ -104,6 +104,12 @@ type CarasoulEntity {
   quote: String!
 }
 
+type UsersEventsEntity {
+  id: String!
+  eventId: String!
+  userId: String!
+}
+
 type Query {
   pokemon: [CreatePokemonDto!]!
   getPokemon(id: String!): CreatePokemonDto!
@@ -124,8 +130,8 @@ type Mutation {
   deletePokemon(id: String!): CreatePokemonDto!
   createPokemon(data: inputPokemon!): CreatePokemonDto!
   createUser(createUserInput: userInput!): CreateUserDto!
-  updateUser(id: String!, updateUserInput: UpdateUserInput!): CreateUserDto!
-  deleteUser(id: String!): CreateUserDto!
+  updateUser(id: String!, updateUserInput: userInput!): UserEntity!
+  deleteUser(id: String!): UserEntity!
   userSignIn(email: String!, password: String!): UserAuthModel!
   createPost(celestialPostData: CreateCelestialPostDto!): CelestialPostModel!
   deletePost(id: String!): CelestialPostModel!
@@ -142,6 +148,8 @@ type Mutation {
   createEvent(createEventInput: CreateEventDto!): EventEntity!
   updateEvent(id: String!, updateEventInput: UpdateEventDto!): EventEntity!
   deleteEvent(id: String!): EventEntity!
+  enterEvent(createEventInput: CreateEventDto!, users: [userEventInput!]!): EventEntity!
+  createUserEvents(data: CreateUsersEventsDto!): UsersEventsEntity!
 }
 
 input UpdatePokemonInput {
@@ -157,16 +165,6 @@ input inputPokemon {
 }
 
 input userInput {
-  email: String!
-  username: String!
-  firstname: String!
-  lastname: String!
-  password: String!
-  contact: Int!
-  address: String!
-}
-
-input UpdateUserInput {
   email: String!
   username: String!
   firstname: String!
@@ -251,4 +249,20 @@ input UpdateEventDto {
   showDate: String
   showTime: String
   id: String!
+}
+
+input userEventInput {
+  id: String!
+  email: String!
+  username: String!
+  firstname: String!
+  lastname: String!
+  password: String!
+  contact: Int!
+  address: String!
+}
+
+input CreateUsersEventsDto {
+  eventId: String!
+  userId: String!
 }

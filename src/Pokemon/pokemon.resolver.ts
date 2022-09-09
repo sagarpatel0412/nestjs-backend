@@ -37,6 +37,7 @@ export class PokemonResolver {
     return this.pokemonService.deletePokemon(id);
   }
 
+  @AllowUnauthorized()
   @Mutation((returns) => CreatePokemonDto)
   async createPokemon(@Args('data') data: inputPokemon) {
     return this.pokemonService.createPokemon(data);

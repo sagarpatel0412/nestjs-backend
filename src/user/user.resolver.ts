@@ -27,15 +27,15 @@ export class UserResolver {
     return this.userService.getUser(id);
   }
 
-  @Mutation((returns) => CreateUserDto)
+  @Mutation((returns) => UserEntity)
   updateUser(
     @Args('id') id: string,
-    @Args('updateUserInput') updateUserInput: UpdateUserInput,
+    @Args("updateUserInput") updateUserInput: userInput,
   ) {
     return this.userService.updateUser(id, updateUserInput);
   }
 
-  @Mutation((returns) => CreateUserDto)
+  @Mutation((returns) => UserEntity)
   deleteUser(@Args('id') id: string) {
     return this.userService.removeUser(id);
   }

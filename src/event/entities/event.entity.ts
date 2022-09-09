@@ -1,9 +1,11 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { CreateUserDto } from 'src/user/dto/create-user.input';
 import { UserEntity } from 'src/user/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
@@ -12,6 +14,7 @@ import {
 
 @Entity('event')
 @ObjectType()
+
 export class EventEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String)
@@ -63,7 +66,7 @@ export class EventEntity {
   @UpdateDateColumn()
   updateAt: Date;
 
-  @ManyToMany((type) => UserEntity, (user) => user.events, { lazy: true })
+  @ManyToMany((type) => UserEntity, (user) => user.events)
   @JoinTable({
     name: 'users_events',
     joinColumn: {
@@ -76,5 +79,5 @@ export class EventEntity {
     },
   })
   @Field(() => [UserEntity], { nullable: true })
-  users: UserEntity[];
+  users: Promise<[UserEntity]>;
 }

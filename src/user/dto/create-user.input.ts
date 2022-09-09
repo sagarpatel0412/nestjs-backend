@@ -1,4 +1,4 @@
-import { ObjectType, Int, Field } from '@nestjs/graphql';
+import { ObjectType, Int, Field, InputType } from '@nestjs/graphql';
 
 @ObjectType()
 export class CreateUserDto {
