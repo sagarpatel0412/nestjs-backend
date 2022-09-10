@@ -3,6 +3,8 @@ import { PostCommentsService } from './post-comments.service';
 import { PostCommentEntity } from './entities/post-comment.entity';
 import { CreatePostCommentDto } from './dto/create-post-comment.input';
 import { UpdatePostCommentDto } from './dto/update-post-comment.input';
+import { CreateCommentUserPostDto } from 'src/celestial-post/dto/create-comment-celestial-post.input';
+import { AllowUnauthorized } from 'src/auth/decorators/allow-unauthorized.decorator';
 
 @Resolver(() => PostCommentEntity)
 export class PostCommentsResolver {
@@ -36,5 +38,15 @@ export class PostCommentsResolver {
   @Query((returns) => PostCommentEntity)
   async getComment(@Args('id') id: string): Promise<PostCommentEntity> {
     return this.postCommentsService.getComment(id);
+  }
+
+  @AllowUnauthorized()
+  @Mutation((returns) => PostCommentEntity)
+  async postComment(
+    @Args('commentInput') commentInput: CreatePostCommentDto,
+    @Args({ name: 'post', type: () => CreateCommentUserPostDto })
+    post: CreateCommentUserPostDto,
+  ): Promise<PostCommentEntity> {
+    return this.postCommentsService.postComment(commentInput, post);
   }
 }

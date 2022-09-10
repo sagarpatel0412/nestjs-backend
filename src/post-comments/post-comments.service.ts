@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateCommentUserPostDto } from 'src/celestial-post/dto/create-comment-celestial-post.input';
 import { Repository } from 'typeorm';
 import { CreatePostCommentDto } from './dto/create-post-comment.input';
 import { UpdatePostCommentDto } from './dto/update-post-comment.input';
@@ -17,7 +18,6 @@ export class PostCommentsService {
   ): Promise<PostCommentEntity> {
     const commentInput = new PostCommentEntity();
     commentInput.userId = createCommentInput.userId;
-    commentInput.postsId = createCommentInput.postsId;
     commentInput.userName = createCommentInput.userName;
     commentInput.comment = createCommentInput.comment;
 
@@ -73,11 +73,24 @@ export class PostCommentsService {
         userId: '',
         userName: '',
         comment: '',
-        postsId: '',
         createdAt: new Date(0),
         updatedAt: new Date(0),
         posts: null,
       };
     }
+  }
+
+  async postComment(
+    commentInput: CreatePostCommentDto,
+    post: CreateCommentUserPostDto,
+  ): Promise<PostCommentEntity> {
+    const comments = new PostCommentEntity();
+    comments.userId = commentInput.userId;
+    comments.userName = commentInput.userName;
+    comments.comment = commentInput.comment;
+    comments.posts = post;
+
+    const commentSave = await this.postCommentRepository.save(comments)
+    return commentSave;
   }
 }

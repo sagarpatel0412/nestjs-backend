@@ -11,6 +11,4 @@ export class CreatePostCommentDto {
   @Field(() => String)
   comment: string;
 
-  @Field(() => String)
-  postsId: string;
 }
