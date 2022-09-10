@@ -1,7 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { createUserPostInput } from 'src/user/input/create-user-post.input';
 import { Repository } from 'typeorm';
 import { CreateCelestialPostDto } from './dto/create-celestial-post.input';
+import { CreateUserPostDto } from './dto/create-user-celestial-post.input';
 import { UpdateCelestialPostInput } from './dto/update-celestial-post.input';
 import { CelestialPost } from './entities/celestial-post.entity';
 import { CelestialPostModel } from './model/celestial-post.model';
@@ -85,5 +87,19 @@ export class CelestialPostService {
       const updatedPost = await this.celestialPostRepository.save(post);
       return updatedPost;
     }
+  }
+
+  async createUserPost(
+    postInput: CreateUserPostDto,
+    user: createUserPostInput,
+  ): Promise<CelestialPost> {
+    const post = new CelestialPost();
+    post.userId = postInput.userId;
+    post.slug = postInput.slug;
+    post.imageLink = postInput.imageLink;
+    post.description = postInput.description;
+    post.users = user;
+    const postsave = await this.celestialPostRepository.save(post);
+    return postsave;
   }
 }

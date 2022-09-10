@@ -43,16 +43,16 @@ export class CelestialPost {
 
   @ManyToOne(() => UserEntity, (users: UserEntity) => users.celestialPosts)
   @Field(() => UserEntity, { nullable: true })
-  users: UserEntity;
+  users?: UserEntity | null;
 
   @OneToMany(
     () => PostCommentEntity,
     (comments: PostCommentEntity) => comments.posts,
   )
   @Field(() => [PostCommentEntity], { nullable: true })
-  comments: PostCommentEntity[];
+  comments?: PostCommentEntity[] | null;
 
   @OneToMany(() => PostLikeEntity, (comments: PostLikeEntity) => comments.posts)
   @Field(() => [PostLikeEntity], { nullable: true })
-  likes: PostLikeEntity[];
+  likes?: PostLikeEntity[] | null;
 }

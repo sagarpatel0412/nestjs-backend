@@ -15,7 +15,6 @@ type PostCommentEntity {
   userName: String!
   comment: String!
   posts: CelestialPost
-  postsId: String!
 }
 
 type PostLikeEntity {
@@ -136,12 +135,15 @@ type Mutation {
   createPost(celestialPostData: CreateCelestialPostDto!): CelestialPostModel!
   deletePost(id: String!): CelestialPostModel!
   updatePost(id: String!, updateCelestialPost: CreateCelestialPostDto!): CelestialPostModel!
+  createUserPost(postInput: CreateUserPostDto!, user: createUserPostInput!): CelestialPost!
   createComment(createCommentInput: CreatePostCommentDto!): PostCommentEntity!
   updateComment(id: String!, updateCommentInput: UpdatePostCommentDto!): PostCommentEntity!
   deleteComment(id: String!): PostCommentEntity!
+  postComment(commentInput: CreatePostCommentDto!, post: CreateCommentUserPostDto!): PostCommentEntity!
   createLike(createPostLikeInput: CreatePostLikeDto!): PostLikeEntity!
   updateLike(id: String!, updatePostLikeInput: UpdatePostLikeDto!): PostLikeEntity!
   deleteLike(id: String!): PostLikeEntity!
+  postLike(likeInput: CreatePostLikeDto!, post: CreateCommentUserPostDto!): PostLikeEntity!
   createCarasoul(createCarasoulInput: CreateCarasoulDto!): CarasoulEntity!
   updateCarasoul(id: String!, updateCarasoulInput: UpdateCarasoulDto!): CarasoulEntity!
   deleteCarasoul(id: String!): CarasoulEntity!
@@ -181,19 +183,45 @@ input CreateCelestialPostDto {
   slug: String!
 }
 
+input CreateUserPostDto {
+  userId: String!
+  description: String!
+  imageLink: String!
+  slug: String!
+}
+
+input createUserPostInput {
+  id: String!
+  email: String!
+  username: String!
+  firstname: String!
+  lastname: String!
+  password: String!
+  contact: Int!
+  address: String!
+}
+
 input CreatePostCommentDto {
   userId: String!
   userName: String!
   comment: String!
-  postsId: String!
 }
 
 input UpdatePostCommentDto {
   userId: String
   userName: String
   comment: String
-  postsId: String
   id: String!
+}
+
+input CreateCommentUserPostDto {
+  id: String!
+  userId: String!
+  description: String!
+  imageLink: String!
+  slug: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input CreatePostLikeDto {

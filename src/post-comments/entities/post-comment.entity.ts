@@ -37,8 +37,5 @@ export class PostCommentEntity {
 
   @ManyToOne(() => CelestialPost, (posts: CelestialPost) => posts.comments)
   @Field(() => CelestialPost, { nullable: true })
-  posts: CelestialPost;
-
-  @Field(() => String)
-  postsId: string;
+  posts?: CelestialPost | null;
 }

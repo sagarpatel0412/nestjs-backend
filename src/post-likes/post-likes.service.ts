@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateCommentUserPostDto } from 'src/celestial-post/dto/create-comment-celestial-post.input';
 import { Repository } from 'typeorm';
 import { CreatePostLikeDto } from './dto/create-post-like.input';
 import { UpdatePostLikeDto } from './dto/update-post-like.input';
@@ -76,5 +77,19 @@ export class PostLikesService {
       relations: ['posts'],
     });
     return like;
+  }
+
+  async postLike(
+    likeInput: CreatePostLikeDto,
+    post: CreateCommentUserPostDto,
+  ): Promise<PostLikeEntity> {
+    const likes = new PostLikeEntity();
+    likes.userId = likeInput.userId;
+    likes.userName = likeInput.userName;
+    likes.like = likeInput.like;
+    likes.posts = post;
+
+    const likeSave = await this.postLikeRepository.save(likes);
+    return likeSave;
   }
 }

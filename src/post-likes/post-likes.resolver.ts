@@ -3,6 +3,8 @@ import { PostLikesService } from './post-likes.service';
 import { PostLikeEntity } from './entities/post-like.entity';
 import { CreatePostLikeDto } from './dto/create-post-like.input';
 import { UpdatePostLikeDto } from './dto/update-post-like.input';
+import { CreateCommentUserPostDto } from 'src/celestial-post/dto/create-comment-celestial-post.input';
+import { AllowUnauthorized } from 'src/auth/decorators/allow-unauthorized.decorator';
 
 @Resolver(() => PostLikeEntity)
 export class PostLikesResolver {
@@ -36,5 +38,15 @@ export class PostLikesResolver {
   @Query((returns) => PostLikeEntity)
   async getComment(@Args('id') id: string): Promise<PostLikeEntity> {
     return this.postLikesService.getComment(id);
+  }
+
+  @AllowUnauthorized()
+  @Mutation(() => PostLikeEntity)
+  postLike(
+    @Args('likeInput') likeInput: CreatePostLikeDto,
+    @Args({ name: 'post', type: () => CreateCommentUserPostDto })
+    post: CreateCommentUserPostDto,
+  ): Promise<PostLikeEntity> {
+    return this.postLikesService.postLike(likeInput, post);
   }
 }
