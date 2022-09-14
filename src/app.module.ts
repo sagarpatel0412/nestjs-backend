@@ -15,6 +15,7 @@ import { HttpModule } from '@nestjs/axios';
 import { CarasoulModule } from './carasoul/carasoul.module';
 import { EventModule } from './event/event.module';
 import { UsersEventsModule } from './users_events/users_events.module';
+import { NewsletterModule } from './newsletter/newsletter.module';
 
 @Module({
   imports: [
@@ -66,7 +67,8 @@ import { UsersEventsModule } from './users_events/users_events.module';
     HttpModule,
     CarasoulModule,
     EventModule,
-    UsersEventsModule
+    UsersEventsModule,
+    NewsletterModule
   ],
   controllers: [AppController],
   providers: [AppService],

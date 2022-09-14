@@ -109,6 +109,11 @@ type UsersEventsEntity {
   userId: String!
 }
 
+type NewsletterEntity {
+  id: String!
+  email: String!
+}
+
 type Query {
   pokemon: [CreatePokemonDto!]!
   getPokemon(id: String!): CreatePokemonDto!
@@ -122,6 +127,8 @@ type Query {
   carasoul(id: String!): CarasoulEntity!
   getEvent(id: String!): EventEntity!
   getEvents: [EventEntity!]!
+  getNewsletters: [NewsletterEntity!]!
+  getNewsletter(id: String!): NewsletterEntity!
 }
 
 type Mutation {
@@ -152,6 +159,8 @@ type Mutation {
   deleteEvent(id: String!): EventEntity!
   enterEvent(createEventInput: CreateEventDto!, users: [userEventInput!]!): EventEntity!
   createUserEvents(data: CreateUsersEventsDto!): UsersEventsEntity!
+  createNewsletter(createNewsletterInput: CreateNewsletterDto!): NewsletterEntity!
+  deleteNewsletter(id: String!): NewsletterEntity!
 }
 
 input UpdatePokemonInput {
@@ -293,4 +302,8 @@ input userEventInput {
 input CreateUsersEventsDto {
   eventId: String!
   userId: String!
+}
+
+input CreateNewsletterDto {
+  email: String!
 }
